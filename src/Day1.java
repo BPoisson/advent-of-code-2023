@@ -28,6 +28,8 @@ public class Day1 {
         return sum;
     }
 
+    // Part 1: Get the sum of all two-digit numbers created from first and last single digits in each line.
+    // Part 2: Get the sum of all two-digit numbers created from the first and last digits, including number words, in each line.
     private int getNumber(String line) {
         int left = 0;
         int right = line.length() - 1;

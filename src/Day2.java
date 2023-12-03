@@ -7,7 +7,7 @@ public class Day2 {
     static final int MAX_GREEN = 13;
     static final int MAX_BLUE = 14;
 
-    public static void main(String[] args) throws FileNotFoundException, IllegalAccessException {
+    public static void main(String[] args) throws FileNotFoundException, IllegalArgumentException {
         File file = new File("inputs/day2Input.txt");
 
         Day2 day2 = new Day2();
@@ -15,7 +15,7 @@ public class Day2 {
         System.out.println(day2.possibleGames(file));
     }
 
-    private int possibleGames(File input) throws FileNotFoundException, IllegalAccessException {
+    private int possibleGames(File input) throws FileNotFoundException, IllegalArgumentException {
         int sum = 0;
         Scanner scanner = new Scanner(input);
 
@@ -31,7 +31,8 @@ public class Day2 {
         return sum;
     }
 
-    private int getPossiblePart2(String line) throws IllegalAccessException {
+    // Get the product of the min red, green blue cubes needed to make each game possible.
+    private int getPossiblePart2(String line) throws IllegalArgumentException {
         int maxRed = 0;
         int maxGreen = 0;
         int maxBlue = 0;
@@ -51,13 +52,14 @@ public class Day2 {
                     case "red" -> maxRed = Math.max(maxRed, num);
                     case "green" -> maxGreen = Math.max(maxGreen, num);
                     case "blue" -> maxBlue = Math.max(maxBlue, num);
-                    default -> throw new IllegalAccessException("Bad stuff happened.");
+                    default -> throw new IllegalArgumentException("Bad stuff happened.");
                 }
             }
         }
         return maxRed * maxGreen * maxBlue;
     }
 
+    // Get the sum of all game IDs that are possible - meaning number of cubes for each round doesn't exceed maxes.
     private int getPossiblePart1(String line) throws IllegalAccessException {
         int maxRed = 0;
         int maxGreen = 0;
@@ -77,14 +79,11 @@ public class Day2 {
 
                 String color = cubeToken.substring(cubeToken.indexOf(" ") + 1);
 
-                if (color.equals("red")) {
-                    maxRed = Math.max(maxRed, num);
-                } else if (color.equals("green")) {
-                    maxGreen = Math.max(maxGreen, num);
-                } else if (color.equals("blue")) {
-                    maxBlue = Math.max(maxBlue, num);
-                } else {
-                    throw new IllegalAccessException("Bad stuff happened.");
+                switch (color) {
+                    case "red" -> maxRed = Math.max(maxRed, num);
+                    case "green" -> maxGreen = Math.max(maxGreen, num);
+                    case "blue" -> maxBlue = Math.max(maxBlue, num);
+                    default -> throw new IllegalAccessException("Bad stuff happened.");
                 }
             }
         }
