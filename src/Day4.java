@@ -38,14 +38,20 @@ public class Day4 {
         return cloneCards(gameMap, queue);
     }
 
+    // Starting with all cards.
+    // For each card, get the count (n) of winning numbers. We get clones of the next (n) cards and process those.
     private int cloneCards(Map<Integer, CardData> gameMap, Deque<Integer> queue) {
         int numCards = queue.size();
+        Map<Integer, Integer> matchCounts = new HashMap<>();
 
         while (!queue.isEmpty()) {
             int currCard = queue.poll();
             CardData cardData = gameMap.get(currCard);
 
-            int matches = getMatchesPart2(cardData.winningNumbers, cardData.gameNumbers);
+            int matches = matchCounts.containsKey(currCard) ? matchCounts.get(currCard)
+                    : getMatchesPart2(cardData.winningNumbers, cardData.gameNumbers);
+
+            matchCounts.put(currCard, matches);
 
             for (int i = currCard + 1; i <= currCard + matches; i++) {
                 queue.add(i);
@@ -90,6 +96,7 @@ public class Day4 {
         return sum;
     }
 
+    // The first winning number for a card gives 1 point. Each subsequent winning number doubles the score.
     private int getScorePart1(Set<Integer> winningNumbers, String[] cardTokens) {
         int score = 0;
 
