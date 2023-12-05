@@ -113,14 +113,16 @@ public class Day4 {
         }
         return score;
     }
-}
 
-class CardData {
-    Set<Integer> winningNumbers;
-    String[] gameNumbers;
+    static class CardData {
+        Set<Integer> winningNumbers;
+        String[] gameNumbers;
 
-    public CardData(Set<Integer> winningNumbers, String[] gameNumbers) {
-        this.winningNumbers = winningNumbers;
-        this.gameNumbers = gameNumbers;
+        public CardData(Set<Integer> winningNumbers, String[] gameNumbers) {
+            this.winningNumbers = winningNumbers;
+            this.gameNumbers = gameNumbers;
+        }
     }
 }
+
+
