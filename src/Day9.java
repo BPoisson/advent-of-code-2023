@@ -64,16 +64,13 @@ public class Day9 {
                 nextNums[i] = diff;
 
             }
-            System.out.println(Arrays.toString(currNums) + " -> " + Arrays.toString(nextNums));
             stack.push(nextNums);
             currNums = nextNums;
         }
 
         while (!stack.isEmpty()) {
             currNums = stack.pop();
-            System.out.print(Arrays.toString(currNums) + " -> ");
             currNums[0] -= nextVal;
-            System.out.println(Arrays.toString(currNums));
             nextVal = currNums[0];
         }
         return nextVal;
